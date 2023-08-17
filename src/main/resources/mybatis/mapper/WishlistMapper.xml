@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.entity.WishlistMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.dao.Wishlist">
+    <id column="owner" jdbcType="VARCHAR" property="owner" />
+    <result column="items" jdbcType="VARCHAR" property="items" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wishlist
+    where owner = #{owner,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.dao.Wishlist">
+    insert into wishlist (owner, items)
+    values (#{owner,jdbcType=VARCHAR}, #{items,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.dao.Wishlist">
+    update wishlist
+    set items = #{items,jdbcType=VARCHAR}
+    where owner = #{owner,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select owner, items
+    from wishlist
+    where owner = #{owner,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select owner, items
+    from wishlist
+  </select>
+</mapper>
